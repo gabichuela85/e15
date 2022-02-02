@@ -1,4 +1,4 @@
 # e15
-Course work for CSCI E-15 
-**By Gaby Brown** 
++ Course work for CSCI E-15 
++ By: Gaby Brown  
 
