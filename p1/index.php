@@ -1,7 +1,7 @@
 <?php
 
 
-$inputWord = 'The zoo is open';
+$inputWord = 'cooler';
 
 $lowercase = strtolower($inputWord);
 
@@ -41,7 +41,9 @@ $coded = strtr($inputWord, $shifty);
 
 $anagram = str_shuffle($lowercase);
 var_dump($anagram);
+$pspell = pspell_new('en', '', '', '', (PSPELL_FAST|PSPELL_RUN_TOGETHER));
+$checkedword = pspell_check($pspell, $anagram);
+var_dump($checkedword);
 
 
-
-require 'index-view.php'; 
+require 'index-view.php';
