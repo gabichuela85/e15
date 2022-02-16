@@ -2,6 +2,9 @@
 
 session_start();
 
+
+//setting session data 
+
 if (isset($_SESSION['results'])) {
     $results = $_SESSION['results'];
 

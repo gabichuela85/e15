@@ -1,17 +1,22 @@
 <?php
 
+//use PhpSpellcheck\SpellChecker\Aspell; 
+
 session_start();
+
+//retrieving session data
+
 
 $word = $_GET['word'];
 
 $lowercase = strtolower($word);
 
 $vowels = [
-    'a',
-    'e',
-    'i',
-    'o',
-    'u'
+    'a', 'A',
+    'e', 'E',
+    'i', 'I',
+    'o', 'O',
+    'u', 'U'
 ];
 //this will check to see if the input word is a palindrome
 $reverse = strrev($lowercase);
@@ -41,6 +46,17 @@ $coded = strtr($word, $shifty);
 
 //create an anagram from the word
 
+//$aspell = Aspell::create(); 
+
+//$misspellings = $aspell->check('mispell', ['en_US'], ['from_example']);
+ 
+//foreach ($misspellings as $misspelling) {
+//    $misspelling->getWord(); // 'mispell'
+//    $misspelling->getLineNumber(); // '1'
+//    $misspelling->getOffset(); // '0'
+//   $misspelling->getSuggestions(); // ['misspell', ...]
+//    $misspelling->getContext(); // ['from_example']
+//};
 //$anagram = str_shuffle($lowercase);
 //var_dump($anagram);
 //$pspell = pspell_new('en', '', '', '', (PSPELL_FAST|PSPELL_RUN_TOGETHER));
