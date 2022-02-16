@@ -44,24 +44,6 @@ $shifty=['A' => 'B', 'a' => 'b', 'B' => 'C', 'b' => 'c', 'C' => 'D', 'c' => 'd',
 
 $coded = strtr($word, $shifty);
 
-//create an anagram from the word
-
-//$aspell = Aspell::create(); 
-
-//$misspellings = $aspell->check('mispell', ['en_US'], ['from_example']);
- 
-//foreach ($misspellings as $misspelling) {
-//    $misspelling->getWord(); // 'mispell'
-//    $misspelling->getLineNumber(); // '1'
-//    $misspelling->getOffset(); // '0'
-//   $misspelling->getSuggestions(); // ['misspell', ...]
-//    $misspelling->getContext(); // ['from_example']
-//};
-//$anagram = str_shuffle($lowercase);
-//var_dump($anagram);
-//$pspell = pspell_new('en', '', '', '', (PSPELL_FAST|PSPELL_RUN_TOGETHER));
-//$checkedword = pspell_check($pspell, $anagram);
-//var_dump($checkedword);
 
 $_SESSION['results'] = [
     'word' => $word,
