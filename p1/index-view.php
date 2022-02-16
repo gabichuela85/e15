@@ -10,10 +10,10 @@
 
 <body>
     <h1>Project 1 E15</h1>
-    <form method=' GET' action='process.php'>
-        <label for=' word'>What's your word?</label>
+    <form method='GET' action='process.php'>
+        <label for='word'>What's your word?</label>
         <input type='text' name='word' id='word'>
-        <button type=' submit'>Process my word</button>
+        <button type='submit'>Process my word</button>
     </form>
     <?php if (isset($word)) {?>
 
