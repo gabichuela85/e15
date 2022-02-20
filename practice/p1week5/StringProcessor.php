@@ -10,10 +10,9 @@ class StringProcessor
     public function __construct($inputString)
     {
         $this->inputString = $inputString;
-        var_dump('StringProcessor class was created with the inputString '. $inputString);
     }
     
-    public function findVowels($inputString)
+    public function findVowels()
     {
         $vowels = [
         'a', 'A',
@@ -25,14 +24,14 @@ class StringProcessor
         $vowelCount = 0;
     
         foreach ($vowels as $vowel) {
-            $vowelCount += substr_count($inputString, $vowel);
+            $vowelCount += substr_count($this->inputString, $vowel);
         }
         return $vowelCount;
     }
     //this will check to see if the input word is a palindrome
-    public function isPalindrome($inputString)
+    public function isPalindrome()
     {
-        $lowercase = strtolower($inputString);
+        $lowercase = strtolower($this->inputString);
         $reverse = strrev($lowercase);
         $palindrome = $reverse == $lowercase;
         return $palindrome;
@@ -40,7 +39,7 @@ class StringProcessor
 
     //shift the each letter in the input word one spot
 
-    public function codeTheWord($inputString)
+    public function codeTheWord()
     {
         $shifty=['A' => 'B', 'a' => 'b', 'B' => 'C', 'b' => 'c', 'C' => 'D', 'c' => 'd',
                 'D' => 'E', 'd' => 'e', 'E' => 'F', 'e' => 'f', 'F' => 'G', 'f' => 'g',
@@ -52,7 +51,7 @@ class StringProcessor
                 'V' => 'W', 'v' => 'w', 'W' => 'X', 'w' => 'x', 'X' => 'Y', 'x' => 'y',
                 'Y' => 'Z', 'y' => 'z', 'Z' => 'A', 'z' => 'a' ];
 
-        $coded = strtr($inputString, $shifty);
+        $coded = strtr($this->inputString, $shifty);
         return $coded;
     }
 }

@@ -3,12 +3,12 @@
 session_start();
 
 
-//setting session data 
+//setting session data
 
 if (isset($_SESSION['results'])) {
     $results = $_SESSION['results'];
 
-    $word = $results['word'];
+    $inputString = $results['inputString'];
     $palindrome = $results['palindrome'];
     $vowelCount = $results['vowelCount'];
     $coded = $results['coded'];
