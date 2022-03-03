@@ -14,7 +14,12 @@ class BookController extends Controller
     
     public function show($title)
     {
-        return "This is the details for the book: " . $title;
+        $bookFound = true ;
+        
+        return view('books/show', [
+            'bookFound' => $bookFound,
+            'title' => $title,
+        ]);
     }
 
     public function filter($category, $subcategory)
