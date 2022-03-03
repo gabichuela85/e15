@@ -22,9 +22,3 @@ Route::get('/contact', [PageController::class, 'contact']);
 Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{title}', [BookController::class, 'show']);
 Route::get('/filter/{category}/{subcategory}', [BookController::class, 'filter']);
-
-Route::get('/example', function () {
-    $foo = [1,2,3];
-    Log::info();
-    return view('abc');
-});

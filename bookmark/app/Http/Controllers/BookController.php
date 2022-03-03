@@ -9,7 +9,7 @@ class BookController extends Controller
     //
     public function index()
     {
-        return 'Showing all books...';
+        return view('books/index');
     }
     
     public function show($title)
@@ -24,6 +24,9 @@ class BookController extends Controller
 
     public function filter($category, $subcategory)
     {
-        echo $category . ", " . $subcategory;
+        return view('books/category', [
+            'category'=> $category,
+            'subcategory' => $subcategory,
+        ]);
     }
 }

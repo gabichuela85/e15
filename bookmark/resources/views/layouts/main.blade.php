@@ -14,9 +14,14 @@
 
     <header>
         <a href='/'><img src='/images/bookmark-logo@2x.png' id='logo' alt='Bookmark Logo'></a>
+        <nav>
+            <a href='/'>Home</a>
+            <a href='/contact'>Contact</a>
+            <a href='/books/library/'>Our Library</a>
+        </nav>
     </header>
 
-    <section>
+    <section> 
         @yield('content')
     </section>
 
