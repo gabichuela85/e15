@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -9,16 +10,28 @@ class BookController extends Controller
     //
     public function index()
     {
-        return view('books/index');
+        $bookData = file_get_contents(database_path('books.json'));
+
+        $books = json_decode($bookData, true);
+         
+        $books = Arr::sort($books, function ($value) {
+            return $value['title'];
+        });
+        
+        return view('books/index', ['books' => $books]);
     }
     
-    public function show($title)
+    public function show($slug)
     {
-        $bookFound = true ;
+        $bookData = file_get_contents(database_path('books.json'));
+        $books = json_decode($bookData, true);
+
+        $book = Arr::first($books, function ($value, $key) use ($slug) {
+            return $key == $slug;
+        });
         
         return view('books/show', [
-            'bookFound' => $bookFound,
-            'title' => $title,
+            'book' => $book,
         ]);
     }
 
