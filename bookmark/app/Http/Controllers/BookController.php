@@ -42,4 +42,29 @@ class BookController extends Controller
             'subcategory' => $subcategory,
         ]);
     }
+
+    /**
+     * GET /search
+     * Search books based on title or author
+     */
+    
+    public function search(Request $request)
+    {
+        $bookData = file_get_contents(database_path('books.json'));
+        $books = json_decode($bookData, true);
+        
+        $searchType = $request->input('searchType', 'title');
+        $searchTerms = $request ->input('searchTerms', '');
+        
+        $searchResults = [];
+        foreach ($books as $slug=>$book) {
+            if (strtolower($book[$searchType]) == strtolower($searchTerms)) {
+                $searchResults[$slug] = $book;
+            }
+        }
+        return redirect('/')->with([
+            'searchTerms'=> $searchTerms,
+            'searchType'=> $searchType,
+            'searchResults' => $searchResults]);
+    }
 }

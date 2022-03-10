@@ -24,3 +24,4 @@ Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{slug}', [BookController::class, 'show']);
 Route::get('/filter/{category}/{subcategory}', [BookController::class, 'filter']);
 Route::get('/list', [ListController::class, 'show']);
+Route::get('/search', [BookController::class, 'search']);
