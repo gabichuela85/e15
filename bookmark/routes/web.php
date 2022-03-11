@@ -16,7 +16,11 @@ use App\Http\Controllers\ListController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+# Make sure the create route comes before the `/books/{slug}` route so it takes precedence
+Route::get('/books/create', [BookController::class, 'create']);
 
+# Note the use of the post method in this route
+Route::post('/books', [BookController::class, 'store']); 
 
 Route::get('/', [PageController::class, 'welcome']);
 Route::get('/contact', [PageController::class, 'contact']);

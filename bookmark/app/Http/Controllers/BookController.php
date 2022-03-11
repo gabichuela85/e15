@@ -56,15 +56,47 @@ class BookController extends Controller
         $searchType = $request->input('searchType', 'title');
         $searchTerms = $request ->input('searchTerms', '');
         
+        
         $searchResults = [];
         foreach ($books as $slug=>$book) {
             if (strtolower($book[$searchType]) == strtolower($searchTerms)) {
                 $searchResults[$slug] = $book;
             }
         }
+        $request->validate([
+            'searchTerms' => 'required',
+            'searchType' => 'required'
+        ]);
+        
         return redirect('/')->with([
             'searchTerms'=> $searchTerms,
             'searchType'=> $searchType,
             'searchResults' => $searchResults]);
+    }
+    /**
+* GET /books/create
+* Display the form to add a new book
+*/
+    public function create(Request $request)
+    {
+        return view('books/create');
+    }
+
+    /**
+    * POST /books
+    * Process the form for adding a new book
+    */
+    public function store(Request $request)
+    {
+        # Code will eventually go here to add the book to the database,
+        # but for now we'll just dump the form data to the page for proof of concept
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'published_year' => 'required|digits:4',
+            'cover_url' => 'url',
+            'purchase_url' => 'required|url',
+            'description' => 'required|min:255'
+        ]);
     }
 }
