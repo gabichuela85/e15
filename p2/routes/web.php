@@ -15,6 +15,7 @@ use App\Http\Controllers\MovieController;
 */
 
 Route::get('/movies', [MovieController::class, 'index']);
+Route::get('/movies/review', [MovieController::class, 'form']);
 Route::get('/', function () {
     return view('welcome');
 });
