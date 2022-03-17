@@ -6,43 +6,53 @@
 
 @section('head')
     <link href='/css/app.css' rel="stylesheet">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 @endsection
 
 @section('content')
-    <div class="movieReview">
-        <h1>Movie Reviews</h1>
+    <h1>{{ $random['title'] }}</h1>
+    <h4>{{ $random['tagline'] }}</h4>
+    <p>Rating: {{ $random['rating'] }} - ({{ $random['year'] }})</p>
+    <p>{{ $random['summary'] }}</p>
+
+
+    <div>
+        <h1>What did you think of {{ $random['title'] }}?</h1>
         <form method='get' action=''>
-            <div>
-                <label for='name'>Your Name:</label>
-                <input type='text' name='name' id='name'>
+            <div class='form-group row'>
+                <label for='name'>Reviewed by: </label>
+                <input type='text' name='name' id='name' value='name'>
             </div>
             <br />
-            <div>
+            <div class='form-group row'>
                 <label for='email'>Email:</label>
                 <input type='email' name='email' id='email'>
             </div>
             <br />
-            <div class="rate">
+            <p>Star Rating:</p>
+            <div class="rate form-group row-reverse">
                 <input type="radio" id="star5" name="rate" value="5" />
-                <label for="star5" title="text">5 stars</label>
+                <label for="star5" title="5 stars">5 stars</label>
                 <input type="radio" id="star4" name="rate" value="4" />
-                <label for="star4" title="text">4 stars</label>
+                <label for="star4" title="4 stars">4 stars</label>
                 <input type="radio" id="star3" name="rate" value="3" />
-                <label for="star3" title="text">3 stars</label>
+                <label for="star3" title="3 stars">3 stars</label>
                 <input type="radio" id="star2" name="rate" value="2" />
-                <label for="star2" title="text">2 stars</label>
+                <label for="star2" title="2 stars">2 stars</label>
                 <input type="radio" id="star1" name="rate" value="1" />
-                <label for="star1" title="text">1 star</label>
+                <label for="star1" title="1 star">1 star</label>
             </div>
             <br />
-            <div>
-                <label for='review'>What did you think?</label>
+            <div class='form-group row'>
+                <label for='review'>Highs? Lows? Improvements? Let us hear it!</label>
                 <br />
-                <input type='textarea' name='review' id='review'>
+                <textarea class='form-control' rows='4' name='review' id='review'></textarea>
             </div>
             <br />
             <div>
-                <button type='submit'>submit</button>
+                <button type='button' class='btn btn-secondary'>submit</button>
             </div>
         </form>
     </div>

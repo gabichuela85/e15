@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use RecursiveArrayIterator;
 
 class MovieController extends Controller
 {
@@ -24,17 +25,29 @@ class MovieController extends Controller
         $movieList = file_get_contents(database_path('movies.json'));
         $movies = json_decode($movieList, true);
         
+        
         $i = 1;
-
-        foreach ($movies as $movie) {
+        foreach ($movies as &$movie) {
             $movie = Arr::add($movie, 'id', $i);
-            $movies = json_encode($movie);
             $i++;
         }
         
-       
-        var_dump($movies);
+        $random = Arr::random($movies);
         
-        return view('movies/review');
+        //$title = Arr::get($random, 'title');
+        //$rating = Arr::get($random, 'contentRating');
+        //$runningTime = Arr::get($random, 'durationHuman');
+        //$summary = Arr::get($random, 'summary');
+        
+        $movies = json_encode($movie);
+
+        
+        return view('movies/review', [
+            'random' => $random,
+            //'title' => $title,
+            //'rating' => $rating,
+            //'runningTime' => $runningTime,
+            //'summary' => $summary,
+        ]);
     }
 }
