@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use RecursiveArrayIterator;
 
 class MovieController extends Controller
@@ -25,7 +26,6 @@ class MovieController extends Controller
         $movieList = file_get_contents(database_path('movies.json'));
         $movies = json_decode($movieList, true);
         
-        
         $i = 1;
         foreach ($movies as &$movie) {
             $movie = Arr::add($movie, 'id', $i);
@@ -33,21 +33,32 @@ class MovieController extends Controller
         }
         
         $random = Arr::random($movies);
-        
-        //$title = Arr::get($random, 'title');
-        //$rating = Arr::get($random, 'contentRating');
-        //$runningTime = Arr::get($random, 'durationHuman');
-        //$summary = Arr::get($random, 'summary');
-        
         $movies = json_encode($movie);
 
         
         return view('movies/review', [
             'random' => $random,
-            //'title' => $title,
-            //'rating' => $rating,
-            //'runningTime' => $runningTime,
-            //'summary' => $summary,
         ]);
+    }
+    public function search(Request $request)
+    {
+        $movieList = file_get_contents(database_path('movies.json'));
+        $movies = json_decode($movieList, true);
+
+        $title = $request->input('title');
+        
+        $searchResults = [];
+        foreach ($movies as $slug=>$movie) {
+            $title = Str::slug($title, '-');
+            if (strtolower($slug) == strtolower($title)) {
+                $searchResults[$slug] = $movie;
+            }
+        }
+        $movie = $searchResults;
+        var_dump($movie);
+        //return view('movies/review', [
+            //'title'=> $title,
+            //'searchResults'=> $searchResults
+        //]);
     }
 }

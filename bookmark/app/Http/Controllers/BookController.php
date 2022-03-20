@@ -65,7 +65,7 @@ class BookController extends Controller
         }
         $request->validate([
             'searchTerms' => 'required',
-            'searchType' => 'required'
+            'searchType' => 'required' 
         ]);
         
         return redirect('/')->with([

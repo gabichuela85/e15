@@ -20,7 +20,7 @@ use App\Http\Controllers\ListController;
 Route::get('/books/create', [BookController::class, 'create']);
 
 # Note the use of the post method in this route
-Route::post('/books', [BookController::class, 'store']); 
+Route::post('/books', [BookController::class, 'store']);
 
 Route::get('/', [PageController::class, 'welcome']);
 Route::get('/contact', [PageController::class, 'contact']);

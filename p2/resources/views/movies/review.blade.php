@@ -12,14 +12,22 @@
 @endsection
 
 @section('content')
-    <h1>{{ $random['title'] }}</h1>
-    <h4>{{ $random['tagline'] }}</h4>
-    <p>Rating: {{ $random['rating'] }} - ({{ $random['year'] }})</p>
-    <p>{{ $random['summary'] }}</p>
-
+    @if (isset($random))
+        <h1>{{ $random['title'] }}</h1>
+        <h4>{{ $random['tagline'] }}</h4>
+        <p>Rating: {{ $random['rating'] }} - ({{ $random['year'] }})</p>
+        <p>{{ $random['summary'] }}</p>
+    @endif
+    @if (isset($searchResults))
+        <?php var_dump($searchResults); ?>
+    @endif
 
     <div>
-        <h1>What did you think of {{ $random['title'] }}?</h1>
+        @if (isset($random))
+            <h1>What did you think of {{ $random['title'] }}?</h1>
+        @else
+            <h1>What did you think of {{ $searchResults['slug'] }}?</h1>
+        @endif
         <form method='get' action=''>
             <div class='form-group row'>
                 <label for='name'>Reviewed by: </label>

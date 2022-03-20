@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,7 @@ use App\Http\Controllers\MovieController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', [PageController::class, 'welcome']);
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/review', [MovieController::class, 'form']);
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/search', [MovieController::class, 'search']);
