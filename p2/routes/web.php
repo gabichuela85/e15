@@ -14,8 +14,9 @@ use App\Http\Controllers\PageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [PageController::class, 'welcome']);
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/review', [MovieController::class, 'form']);
 Route::get('/search', [MovieController::class, 'search']);
-Route::post('/movies/review', [MovieControlloer::class, 'process']); 
+Route::post('/process', [MovieController::class, 'process']);

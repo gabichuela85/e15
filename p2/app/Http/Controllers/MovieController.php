@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use RecursiveArrayIterator;
 
 class MovieController extends Controller
@@ -55,23 +57,44 @@ class MovieController extends Controller
                 $searchResults = Arr::collapse($searchResults);
             }
         }
+
+        $movieArray = [];
+        foreach ($movies as $slug=>$movie) {
+            array_push($movieArray, $movie['title']);
+        }
+        //$movieArray = implode(', ', $movieArray);
+    
+        Validator::make($title, [
+            'title' => [
+                'required',
+                Rule::in([$movieArray]),
+            ],
+        ]);
         
+            
         return view('movies/review', [
             'title'=> $title,
             'searchResults'=> $searchResults,
             'movie'=> $movie,
         ]);
     }
-    public function process(Request $request) 
+    public function process(Request $request)
     {
-        $name = $request->input('name', ''); 
-        $email = $request->input('email', ''); 
-        $review = $request->input('review', ''); 
+        $name = $request->input('name', '');
+        $email = $request->input('email', '');
+        $review = $request->input('review', '');
 
         $request->validate([
-            'name' => 'required', 
-            'email'=> 'required|email:rfc,dns', 
-            'review' => 'required|'
-        ])
+            'name' => 'required|max:50',
+            'email'=> 'required|email:rfc,dns',
+            'review' => 'required|min:255'
+        ]);
+    
+        
+        return redirect('/')->with([
+            'name'=>$name,
+            'email'=>$email,
+            'review'=>$review
+        ]);
     }
 }

@@ -9,7 +9,7 @@
         <fieldset>
             <label for='searchTitle'>
                 Title:
-                <input type='text' name='title' value='{{ $title }}'>
+                <input type='text' name='title' value='{{ old('title') }}'>
             </label>
         </fieldset>
         <fieldset>
@@ -22,4 +22,9 @@
             <button>Pick Me a Movie</button>
         </fieldset>
     </form>
+    @if (is_null($searchResults))
+        <div class='results alert alert-warning'>
+            No results found.
+        </div>
+    @endif
 @endsection
