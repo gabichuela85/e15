@@ -52,13 +52,26 @@ class MovieController extends Controller
             $title = Str::slug($title, '-');
             if (strtolower($slug) == strtolower($title)) {
                 $searchResults[$slug] = $movie;
+                $searchResults = Arr::collapse($searchResults);
             }
         }
-        $movie = $searchResults;
-        var_dump($movie);
-        //return view('movies/review', [
-            //'title'=> $title,
-            //'searchResults'=> $searchResults
-        //]);
+        
+        return view('movies/review', [
+            'title'=> $title,
+            'searchResults'=> $searchResults,
+            'movie'=> $movie,
+        ]);
+    }
+    public function process(Request $request) 
+    {
+        $name = $request->input('name', ''); 
+        $email = $request->input('email', ''); 
+        $review = $request->input('review', ''); 
+
+        $request->validate([
+            'name' => 'required', 
+            'email'=> 'required|email:rfc,dns', 
+            'review' => 'required|'
+        ])
     }
 }

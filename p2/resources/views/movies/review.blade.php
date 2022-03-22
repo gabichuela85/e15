@@ -19,16 +19,19 @@
         <p>{{ $random['summary'] }}</p>
     @endif
     @if (isset($searchResults))
-        <?php var_dump($searchResults); ?>
+        <h1>{{ $searchResults['title'] }}</h1>
+        <h4>{{ $searchResults['tagline'] }}</h4>
+        <p>Rating: {{ $searchResults['rating'] }} - ({{ $searchResults['year'] }})</p>
+        <p>{{ $searchResults['summary'] }}</p>
     @endif
 
     <div>
         @if (isset($random))
             <h1>What did you think of {{ $random['title'] }}?</h1>
         @else
-            <h1>What did you think of {{ $searchResults['slug'] }}?</h1>
+            <h1>What did you think of {{ $searchResults['title'] }}?</h1>
         @endif
-        <form method='get' action=''>
+        <form method='post' action='/'>
             <div class='form-group row'>
                 <label for='name'>Reviewed by: </label>
                 <input type='text' name='name' id='name' value='name'>

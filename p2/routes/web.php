@@ -18,3 +18,4 @@ Route::get('/', [PageController::class, 'welcome']);
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/review', [MovieController::class, 'form']);
 Route::get('/search', [MovieController::class, 'search']);
+Route::post('/movies/review', [MovieControlloer::class, 'process']); 
