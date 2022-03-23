@@ -6,16 +6,21 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function welcome()
+    public function welcome(Request $request)
     {
-        $title = session('title', null);
-        $year = session('year', null);
+
+        $random = session('random', null);
         $searchResults = session('searchResults', null);
+        $name = session('name', null);
+        $email = session('email', null);
+        $review = session('review', null);
 
         return view('/welcome', [
-            'title' => $title,
-            'year' => $year,
-            'searchResults' => $searchResults
+            'random'=>$random,
+            'searchResults' => $searchResults,
+            'name' => $name,
+            'email' => $email,
+            'review' => $review
         ]);
     }
 }

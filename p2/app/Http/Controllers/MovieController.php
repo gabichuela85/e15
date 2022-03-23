@@ -57,32 +57,18 @@ class MovieController extends Controller
                 $searchResults = Arr::collapse($searchResults);
             }
         }
-
-        $movieArray = [];
-        foreach ($movies as $slug=>$movie) {
-            array_push($movieArray, $movie['title']);
-        }
-        //$movieArray = implode(', ', $movieArray);
-    
-        Validator::make($title, [
-            'title' => [
-                'required',
-                Rule::in([$movieArray]),
-            ],
-        ]);
-        
-            
         return view('movies/review', [
-            'title'=> $title,
             'searchResults'=> $searchResults,
-            'movie'=> $movie,
         ]);
     }
     public function process(Request $request)
     {
         $name = $request->input('name', '');
         $email = $request->input('email', '');
-        $review = $request->input('review', '');
+        $review = $request->input('review');
+        $searchResults = $request->input('searchResults');
+        $random = $request->input('random');
+        
 
         $request->validate([
             'name' => 'required|max:50',
@@ -94,7 +80,9 @@ class MovieController extends Controller
         return redirect('/')->with([
             'name'=>$name,
             'email'=>$email,
-            'review'=>$review
+            'review'=>$review,
+            'random'=>$random,
+            'searchResults'=>$searchResults
         ]);
     }
 }
