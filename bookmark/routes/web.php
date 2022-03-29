@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\PracticeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::get('/books/create', [BookController::class, 'create']);
 
 # Note the use of the post method in this route
 Route::post('/books', [BookController::class, 'store']);
-
+Route::any('/practice/{n?}', [PracticeController::class, 'index']);
 Route::get('/', [PageController::class, 'welcome']);
 Route::get('/contact', [PageController::class, 'contact']);
 Route::get('/books', [BookController::class, 'index']);

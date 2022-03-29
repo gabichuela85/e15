@@ -2,6 +2,7 @@
 
 return [
 
+    'contact_email' => 'gaby.leonguerrero@gmail.com',
     /*
     |--------------------------------------------------------------------------
     | Default Mailer
