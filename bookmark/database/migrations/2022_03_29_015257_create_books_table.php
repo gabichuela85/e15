@@ -17,10 +17,10 @@ return new class extends Migration {
             $table->timestamps();# 'CREATED_AT', 'UPDATED_AT'
             $table->string('slug'); #VARCHAR
             $table->string('title'); #VARCHAR
-            $table->tinyInteger('published_year'); #VARCHAR
+            $table->smallInteger('published_year'); #VARCHAR
             $table->string('author'); #VARCHAR
             $table->string('cover_url')->nullable(); #VARCHAR
-            $table->string('infor_url'); #VARCHAR
+            $table->string('info_url'); #VARCHAR
             $table->string('purchase_url'); #VARCHAR
             $table->text('description'); #VARCHAR
         });
