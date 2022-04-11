@@ -12,6 +12,12 @@ class PracticeController extends Controller
      * First practice example
      * GET /practice/1
      */
+    //public function practice8()
+    //{
+    # Return the two latest books added
+    //$book = Book::;
+    //}
+    
     public function practice7()
     {
         # First get a book to delete
