@@ -27,6 +27,12 @@ Route::get('/', [PageController::class, 'welcome']);
 Route::get('/contact', [PageController::class, 'contact']);
 Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{slug}', [BookController::class, 'show']);
+
 Route::get('/filter/{category}/{subcategory}', [BookController::class, 'filter']);
 Route::get('/list', [ListController::class, 'show']);
 Route::get('/search', [BookController::class, 'search']);
+
+Route::get('/books/{slug}/edit', [BookController::class, 'edit']);
+Route::put('/books/{slug}', [BookController::class, 'update']);
+
+Route::get('/books/{slug}/delete', [BookController::class, 'delete']);

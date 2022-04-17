@@ -16,7 +16,7 @@
     @else
         <div id='books'>
             @foreach ($books as $slug => $book)
-                <a class='book' href='/books/{{ $slug }}'>
+                <a class='book' href='/books/{{ $book['slug'] }}'>
                     <h3>{{ $book['title'] }}</h3>
                     <img class='cover' src='{{ $book['cover_url'] }}'>
                 </a>

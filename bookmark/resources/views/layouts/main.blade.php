@@ -22,6 +22,7 @@
             <ul>
                 <li><a href='/'>Home</a></li>
                 <li><a href='/books'>All Books</a></li>
+                <li><a href='/books/create'>Add a Book</a></li>
                 <li><a href='/list'>Your list</a></li>
                 <li><a href='/contact'>Contact</a></li>
             </ul>

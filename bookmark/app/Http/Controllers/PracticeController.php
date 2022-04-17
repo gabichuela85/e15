@@ -12,11 +12,59 @@ class PracticeController extends Controller
      * First practice example
      * GET /practice/1
      */
-    //public function practice8()
-    //{
-    # Return the two latest books added
-    //$book = Book::;
-    //}
+    public function practice8()
+    {
+        # Return the two latest books added
+        $book = Book::orderBy('id')->get();
+
+        $newbooks = $book->sortByDesc('id')->take(2);
+        
+        dump($newbooks);
+    }
+
+    public function practice10()
+    {
+        $books = Book::orderBy('title')->get();
+        foreach ($books as $book) {
+            dump($book->title);
+        }
+    }
+
+    public function practice11()
+    {
+        $books = Book::orderByDesc('published_year')->get();
+        foreach ($books as $book) {
+            dump($book->title . ' - ' . $book->published_year);
+        }
+    }
+
+    public function practice12()
+    {
+        # First get a book to delete
+        $books = Book::where('author', 'LIKE', '%Rowling%')->get();
+        
+        foreach ($books as $book) {
+            if (!$book) {
+                dump('Did not delete- Book not found.');
+            } else {
+                $book->delete();
+                dump('Deletion complete');
+            }
+        }
+
+        # Query for books by F. Scott Fitzgerald to confirm the above deletion worked as expected
+        # This should yield an empty array
+        dump(Book::where('author', 'LIKE', '%Rowling%')->get()->toArray());
+    }
+    public function practice9()
+    {
+        $books = Book::where('published_year', '>', '1950')->get();
+        foreach ($books as $book) {
+            # Change some properties
+            $description = $book->title . ' ' . $book->published_year;
+            dump($description);
+        }
+    }
     
     public function practice7()
     {
