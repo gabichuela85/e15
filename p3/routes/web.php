@@ -15,5 +15,6 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', [PageController::class, 'welcome']);
+Route::post('/', [PageController::class, 'entry']); 
 Route::get('/myhome', [PageController::class, 'home']);
 Route::get('/new', [PageController::class, 'new']);
