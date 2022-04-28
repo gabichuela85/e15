@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Author;
 
 class BookController extends Controller
 {
@@ -12,12 +13,13 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
-         
+        
+        $newBooks = $books->sortByDesc('id')->take(3);
         //$books = Arr::sort($books, function ($value) {
         //return $value['title'];
         //});
         
-        return view('books/index', ['books' => $books]);
+        return view('books/index', ['books' => $books, 'newBooks' => $newBooks]);
     }
     
     public function show($slug)
@@ -44,28 +46,18 @@ class BookController extends Controller
     
     public function search(Request $request)
     {
-        $bookData = file_get_contents(database_path('books.json'));
-        $books = json_decode($bookData, true);
-        
+        $request->validate([
+                'searchTerms' => 'required',
+                'searchType' => 'required'
+            ]);
+        #get form data
         $searchType = $request->input('searchType', 'title');
         $searchTerms = $request ->input('searchTerms', '');
-        
-        
-        $searchResults = [];
-        foreach ($books as $slug=>$book) {
-            if (strtolower($book[$searchType]) == strtolower($searchTerms)) {
-                $searchResults[$slug] = $book;
-            }
-        }
-        $request->validate([
-            'searchTerms' => 'required',
-            'searchType' => 'required'
-        ]);
+        #query the database
+        $searchResults = Book::where($searchType, 'LIKE', '%'. $searchTerms. '%')->get();
         
         return redirect('/')->with([
-            'searchTerms'=> $searchTerms,
-            'searchType'=> $searchType,
-            'searchResults' => $searchResults]);
+            'searchResults' => $searchResults])->withInput();
     }
     /**
 * GET /books/create
@@ -73,7 +65,9 @@ class BookController extends Controller
 */
     public function create(Request $request)
     {
-        return view('books/create');
+        $authors = Author::orderBy('last_name')->select('id', 'first_name', 'last_name')->get();
+        
+        return view('books/create', ['authors' => $authors]);
     }
 
     /**
@@ -87,7 +81,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:books,slug',
-            'author' => 'required|max:255',
+            'author_id' => 'required',
             'published_year' => 'required|digits:4',
             'cover_url' => 'required|url',
             'info_url' => 'required|url',
@@ -98,7 +92,8 @@ class BookController extends Controller
         $book = new Book();
         $book->title=$request->title;
         $book->slug=$request->slug;
-        $book->author=$request->author;
+        $book->author_id=$request->author_id;
+        
         $book->published_year=$request->published_year;
         $book->cover_url=$request->cover_url;
         $book->info_url=$request->info_url;
@@ -127,7 +122,21 @@ class BookController extends Controller
     public function delete($slug)
     {
         $book = Book::where('slug', '=', $slug)->first();
-        var_dump($book);
+        
+        return view('books/delete', [
+            'book' => $book
+        ]);
+    }
+    
+    public function destroy($slug)
+    {
+        $book = Book::where('slug', '=', $slug)->first();
+        $book->users()->detach();
+        $book->delete();
+
+        return redirect('/books')->with([
+            'flash-alert' =>'"' . $book->title . '" was removed.'
+        ]);
     }
     public function update(Request $request, $slug)
     {

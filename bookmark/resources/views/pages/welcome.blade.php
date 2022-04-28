@@ -2,6 +2,11 @@
 
 
 @section('content')
+    @if(Auth::user())
+    <h2>
+    Hello {{ Auth::user()->name }}!
+    </h2>
+    @endif
     <p>Welcome to bookmark please check back later once we add books to our library</p>
 
     <form method='GET' action='/search'>

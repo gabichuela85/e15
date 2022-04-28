@@ -18,9 +18,8 @@
 
     <form method='POST' action='/books'>
         <div class='details'>* Required fields</div>
-
         {{ csrf_field() }}
-        {{ method_field('put') }}
+
 
         <label for='title'>* Title</label>
         <input type='text' name='title' id='title' value='{{ old('title') }}'>
@@ -28,9 +27,13 @@
         <label for='slug'>* Slug</label>
         <input type='text' name='slug' id='slug' value='{{ old('slug') }}'>
 
-        <label for='author'>* Author</label>
-        <input type='text' name='author' id='author' value='{{ old('author') }}'>
-
+        <label for='author_id'>* Author</label>
+        <select name='author_id' id='author_id'>
+            <option value=''>Choose One</option>
+            @foreach ($authors as $author)
+                <option value='{{ $author->id }}'>{{ $author->last_name }}, {{ $author->first_name }}</option>
+            @endforeach
+        </select>
         <label for='published_year'>* Published Year (YYYY)</label>
         <input type='text' name='published_year' id='published_year' value='{{ old('published_year') }}'>
 

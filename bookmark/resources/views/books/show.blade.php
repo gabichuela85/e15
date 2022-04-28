@@ -22,7 +22,8 @@
             {{ $book->description }}
             <a href='{{ $book->info_url }}'>Learn more...</a>
         </p>
-        <a href='/books/{{ $book->slug }}/edit'>Edit this Book</a>
-        <a href='/books/{{ $book->slug }}/delete'>Delete this Book</a>
+        <a href='/books/{{ $book->slug }}/edit' class='fa fa-edit'>Edit this Book</a>
+        <a href='/books/{{ $book->slug }}/delete' class='fa fa-trash'>Delete this Book</a>
+        <a href='/list/{{ $book->slug }}/add' class='fa fa-plus'>Add to your List</a>
     @endif
 @endsection

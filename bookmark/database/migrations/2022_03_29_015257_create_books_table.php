@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->string('slug'); #VARCHAR
             $table->string('title'); #VARCHAR
             $table->smallInteger('published_year'); #VARCHAR
-            $table->string('author'); #VARCHAR
             $table->string('cover_url')->nullable(); #VARCHAR
             $table->string('info_url'); #VARCHAR
             $table->string('purchase_url'); #VARCHAR
