@@ -1,5 +1,8 @@
 @extends('layouts/main')
+@section('head')
 
+
+@endsection
 @section('content')
     <h1>This is the Welcome Page</h1>
     <form method='GET' action='/new'>

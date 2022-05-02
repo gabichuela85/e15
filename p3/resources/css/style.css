@@ -1,0 +1,20 @@
+#main {
+    background-color: blue;
+}
+
+#weekly {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.daily,
+#weekly {
+    outline: black;
+    padding: 5px;
+}
+
+.daily {
+    width: 50%;
+    height: 25%;
+}

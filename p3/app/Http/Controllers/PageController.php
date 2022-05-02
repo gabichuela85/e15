@@ -14,17 +14,24 @@ class PageController extends Controller
     {
         $toDoList = $request->toDoList;
         $items = explode(',', $toDoList);
+        $all = $request->all();
         $schedule = $request->schedule . ":00 " . $request->earlyLate ."...." . $request->task;
         $notes = $request->notes;
         dump($items);
         dump($notes);
         dump($schedule);
-        return view('pages/welcome');
+        dump($all);
+        return view('pages/home', [
+            'items'=>$items,
+            'notes'=>$notes,
+            'schedule'=>$schedule,
+        ]);
     }
     public function home()
     {
-        return view('pages/users');
+        return view('pages/home');
     }
+    
     public function new(Request $request)
     {
         $toDoList = $request->option1;
