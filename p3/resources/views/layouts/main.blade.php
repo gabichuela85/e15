@@ -16,15 +16,23 @@
 <body>
 
     <header>
-        {{-- <nav>
+        <nav>
             <ul>
-                <li><a href='/myhome'>Login</a></li>
-                <li><a href='/'>Logout</a></li>
+                <li>
+                    @if (!Auth::user())
+                        <a href='/login'>Login</a>
+                    @else
+                        <form method='POST' id='logout' action='/logout'>
+                            {{ csrf_field() }}
+                            <a href='#' onClick='document.getElementById("logout").submit();'>Logout</a>
+                        </form>
+                    @endif
+                </li>
                 <li><a href=''></a></li>
                 <li><a href=''></a></li>
                 <li><a href=''></a></li>
             </ul>
-        </nav> --}}
+        </nav>
     </header>
 
     <section id='main'>

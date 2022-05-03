@@ -1,9 +1,12 @@
 @extends('layouts/main')
 @section('head')
-
-
 @endsection
 @section('content')
+    @if (Auth::user())
+        <h2>
+            Hello {{ Auth::user()->name }}!
+        </h2>
+    @endif
     <h1>This is the Welcome Page</h1>
     <form method='GET' action='/new'>
         <input type="checkbox" id="option1" name="option1" value="Task List">

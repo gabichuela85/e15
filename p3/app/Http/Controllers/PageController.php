@@ -22,6 +22,7 @@ class PageController extends Controller
         dump($schedule);
         dump($all);
         return view('pages/home', [
+            'all'=>$all,
             'items'=>$items,
             'notes'=>$notes,
             'schedule'=>$schedule,
