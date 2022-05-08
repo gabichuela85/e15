@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\EntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +17,5 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'welcome']);
 Route::get('/home', [PageController::class, 'home']);
-Route::post('/home', [PageController::class, 'entry']);
+Route::post('/home', [EntryController::class, 'newEntry']);
 Route::get('/new', [PageController::class, 'new']);

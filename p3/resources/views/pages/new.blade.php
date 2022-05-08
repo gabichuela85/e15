@@ -5,55 +5,42 @@
 @endsection
 
 @section('content')
-    This is where users will create a new daily Entry
+    <h1>New Entry</h1>
     <form method='POST' action='/home'>
         {{ csrf_field() }}
-        @if ($toDoList)
-            <label for='toDoList'>Write out your To Do List here. Separate each item with a comma</label>
-            <input type='text' id='toDoList' name='toDoList' />
-        @endif
-        <br>
-        @if ($schedule)
-            <div class='task'>
-                <label for='schedule'>Time: </label>
-                <select name='schedule' id='schedule' class='schedule'>
-                    <option value='12'>12</option>
-                    <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option>
-                    <option value='4'>4</option>
-                    <option value='5'>5</option>
-                    <option value='6'>6</option>
-                    <option value='7'>7</option>
-                    <option value='8'>8</option>
-                    <option value='9'>9</option>
-                    <option value='10'>10</option>
-                    <option value='11'>11</option>
+
+        <div class='form-group row'>
+            <label for='days' class='col-sm-2 col-form-label'>Day of the Week</label>
+            <div class='col-sm-10'>
+                <select id='days' name='days'>
+                    <option value='Monday'>Monday</option>
+                    <option value='Tuesday'>Tuesday</option>
+                    <option value='Wednesday'>Wednesday</option>
+                    <option value='Thursday'>Thursday</option>
+                    <option value='Friday'>Friday</option>
+                    <option value='Saturday'>Saturday</option>
+                    <option value='Sunday'>Sunday</option>
                 </select>
-                <select name='earlyLate' class='earlyLate'>
-                    <option value='AM'>AM</option>
-                    <option value='PM'>PM</option>
-                </select>
-                <input name='task' class='taskInput' type='text'>
             </div>
-            <input type='button' class='plusButton' value='+' />
-        @endif
-        @if ($notes)
-            <br>
-            <label for='notes'>Notes for Today</label>
-            <input type='textarea' id='notes' name='notes'>
-        @endif
-        <br>
-        <button type='submit'></button>
+        </div>
+        <div class='form-group row'>
+            <label for='notes' class='col-sm-2 col-form-label'>Notes</label>
+            <div class='col-sm-10'>
+                <textarea name='notes' id='notes'>{{ old('notes') }}</textarea>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <label for='pic_url' class='col-sm-2 col-form-label'>Pic URL of the Day</label>
+            <div class='col-sm-10'>
+                <input type='text' name='pic_url' id='pic_url' value='{{ old('pic_url') }}'>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <label for="quote" class='col-sm-2 col-form-label'>Include daily Quote</label>
+            <div class='col-sm-10'>
+                <input type="checkbox" id="quote" name="quote" value="quote">
+            </div>
+        </div>
+        <button type='submit' class='btn btn-secondary'>Create Entry</button>
     </form>
-    <script type='text/javascript'>
-        $(document).ready(function() {
-            var times = [];
-            $('.plusButton').click(function() {
-                times = [document.getElementbyId('schedule').value];
-                var newel = $('.task:last').clone();
-                $(newel).insertAfter('.task:last');
-            });
-        });
-    </script>
 @endsection

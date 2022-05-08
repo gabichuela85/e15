@@ -1,8 +1,5 @@
-#main {
-    background-color: blue;
-}
-
 #weekly {
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -10,11 +7,11 @@
 
 .daily,
 #weekly {
-    outline: black;
+    outline: black 3px;
     padding: 5px;
 }
 
 .daily {
     width: 50%;
-    height: 25%;
+    height: 200px;
 }

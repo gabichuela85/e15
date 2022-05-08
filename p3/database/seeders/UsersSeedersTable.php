@@ -27,5 +27,9 @@ class UsersSeedersTable extends Seeder
             ['password' => Hash::make('asdfasdf')
         ]
         );
+        $user = User::updateOrCreate(
+            ['email' => 'gaby.leonguerrero@gmail.com', 'name' => 'Gaby Brown'],
+            ['password' => Hash::make('asdfasdf')]
+        );
     }
 }
