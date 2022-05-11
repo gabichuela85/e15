@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use App\Models\Quote;
+use App\Rules\SingleDate;
+use Illuminate\Validation\Rules\Unique;
 
 class EntryController extends Controller
 {
@@ -13,27 +16,54 @@ class EntryController extends Controller
     {
         $request->validate([
             'days'=>'required',
-            'notes'=>'nullable|max:500',
+            'notes'=>'required|max:1000',
             'pic_url'=>'nullable|url',
         ]);
+        
+        
+        
+        $user = Auth::user();
         
         $entry = new Entry();
         $entry->days = $request->days;
         $entry->notes = $request->notes;
         $entry->pic_url = $request->pic_url;
-        $entry->save();
-        
+        $entry->user_id = $user->id;
         if ($request->quote) {
             $count = DB::table('quotes')->count();
             $getQuoteNumber = rand(0, $count);
-            $quoteOfTheDay = Quote::find($getQuoteNumber)->toArray();
-            dump($quoteOfTheDay);
+            $quote = Quote::find($getQuoteNumber);
+            $entry->quote_id = $quote->id;
         }
         
-        dump('Added: ' . $entry->days);
-        dump(Entry::all()->toArray());
+        $entry->save();
+        
+        $entries = Entry::all();
+        
         return view('pages/home', [
-            
+            'entries'=>$entries,
         ]);
+    }
+
+    public function home()
+    {
+        $entries = Entry::all();
+        return view('pages/home', [
+            'entries'=>$entries,
+        ]);
+    }
+
+    public function daily($id)
+    {
+        $single = Entry::where('id', '=', $id)->first();
+
+        return view('pages/daily', [
+            'single'=>$single,
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $entry = Entry::where('id', '=', $id)->first();
     }
 }

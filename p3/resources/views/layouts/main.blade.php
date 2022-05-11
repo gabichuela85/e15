@@ -17,7 +17,7 @@
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href='/'>Bullet Journal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,8 +26,8 @@
                 <div class='navbar-nav'>
                     @if (!Auth::user())
                         <a href='/login' class='nav-item active nav-link'>Login</a>
-                        <a href='/new' class='nav-item nav-link'>Create</a>
                     @else
+                        <a href='/new' class='nav-item nav-link'>Create</a>
                         <form method='POST' id='logout' action='/logout'>
                             {{ csrf_field() }}
                             <a class='nav-item active nav-link' href='#'
@@ -41,12 +41,12 @@
         </nav>
     </header>
 
-    <section id='main'>
+    <section id='main' class='container'>
         @yield('content')
     </section>
 
     <footer>
-        &copy; Bookmark, Inc. {{ config('mail.contact_email') }}
+        &copy; DigitalBulletJournal Inc {{ config('mail.contact_email') }}
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">

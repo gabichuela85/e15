@@ -1,17 +1,23 @@
-#weekly {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.entry {
+    width: 250px;
+    min-height: min-content;
 }
 
-.daily,
-#weekly {
-    outline: black 3px;
-    padding: 5px;
+.single {
+    width: 500px;
+    height: 800px;
 }
 
-.daily {
-    width: 50%;
-    height: 200px;
+.single,
+.entry {
+    border: 5px solid black;
+    text-align: center;
+    padding: 10px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+
 }

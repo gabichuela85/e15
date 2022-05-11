@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('entries', function (Blueprint $table) {
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -23,6 +26,10 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('entries', function (Blueprint $table) {
+            $table->dropForeign('entries_user_id_foreign');
+
+            $table->dropColumn('user_id');
+        });
     }
 };

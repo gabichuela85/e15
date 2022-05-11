@@ -6,7 +6,7 @@
 
 @section('content')
     <h1>New Entry</h1>
-    <form method='POST' action='/home'>
+    <form method='POST' action='/home' test='new'>
         {{ csrf_field() }}
 
         <div class='form-group row'>
@@ -21,6 +21,12 @@
                     <option value='Saturday'>Saturday</option>
                     <option value='Sunday'>Sunday</option>
                 </select>
+            </div>
+        </div>
+        <div class='form-group row'>
+            <label for='date' class='col-sm-2 col-form-label'>Entry Date</label>
+            <div class='col-sm-10'>
+                <input type='date' id='date' name='date'>
             </div>
         </div>
         <div class='form-group row'>
@@ -41,6 +47,13 @@
                 <input type="checkbox" id="quote" name="quote" value="quote">
             </div>
         </div>
-        <button type='submit' class='btn btn-secondary'>Create Entry</button>
+        <button type='submit' test='submit' class='btn btn-secondary'>Create Entry</button>
     </form>
+    @if (count($errors) > 0)
+        <ul class='alert alert-danger'>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 @endsection
